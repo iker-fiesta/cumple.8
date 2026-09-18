@@ -1,0 +1,285 @@
+  :root{
+    --jungle-dark: #1F4D3C;
+    --jungle: #2E7D5B;
+    --leaf: #6FCF97;
+    --mud: #8B5A2B;
+    --sun: #FFB84C;
+    --coral: #FF6B4A;
+    --cream: #FFF9EC;
+  }
+
+  *{ box-sizing:border-box; margin:0; padding:0; }
+
+  html{ height:100%; }
+
+  body{
+    min-height:100vh;
+    min-height:100dvh;
+    font-family:'Nunito', sans-serif;
+    background:
+      radial-gradient(circle at 20% 10%, rgba(255,184,76,0.35), transparent 45%),
+      radial-gradient(circle at 85% 80%, rgba(111,207,151,0.35), transparent 45%),
+      linear-gradient(180deg, var(--jungle-dark), var(--jungle) 70%);
+    color:var(--cream);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow-x:hidden;
+    overflow-y: auto;
+    padding:16px;
+    position:relative;
+  }
+
+  /* ---------- hojas cayendo ---------- */
+  .leaf{
+    position:fixed;
+    top:-8vh;
+    font-size:26px;
+    animation:leaf-fall linear infinite;
+    pointer-events:none;
+    z-index:1;
+    opacity:0.85;
+  }
+  @keyframes leaf-fall{
+    0%{ transform:translateY(0) translateX(0) rotate(0deg); }
+    50%{ transform:translateY(55vh) translateX(30px) rotate(180deg); }
+    100%{ transform:translateY(115vh) translateX(-20px) rotate(360deg); }
+  }
+
+  /* ---------- dino caminando ENCIMA de la tarjeta (imagen) ---------- */
+  .dino-walk{
+    position:absolute;
+    bottom:10px;
+    left:-22%;
+    width:clamp(46px, 20%, 82px);
+    height:auto;
+    animation:walk-across-card 9s linear infinite;
+    z-index:8;
+    pointer-events:none;
+    filter:drop-shadow(0 6px 6px rgba(0,0,0,0.3));
+  }
+  @keyframes walk-across-card{
+    0%{ left:-22%; transform:scaleX(1); }
+    48%{ left:98%; transform:scaleX(1); }
+    50%{ left:98%; transform:scaleX(-1); }
+    98%{ left:-22%; transform:scaleX(-1); }
+    100%{ left:-22%; transform:scaleX(1); }
+  }
+
+  /* ---------- pterodáctilo volando ENCIMA de la tarjeta (imagen) ---------- */
+  .dino-fly{
+    position:absolute;
+    top:-4%;
+    left:-26%;
+    width:clamp(36px, 15%, 64px);
+    height:auto;
+    z-index:9;
+    pointer-events:none;
+    opacity:0.95;
+    animation:fly-across-card 10s linear infinite;
+    filter:drop-shadow(0 5px 5px rgba(0,0,0,0.25));
+  }
+  @keyframes fly-across-card{
+    0%{ left:-26%; top:2%; transform:rotate(-4deg); }
+    50%{ left:52%; top:-8%; transform:rotate(3deg); }
+    100%{ left:122%; top:6%; transform:rotate(-4deg); }
+  }
+
+  /* ---------- dinos de fondo, esquinas (imagen, decorativo) ---------- */
+  .dino-bg{
+    position:fixed;
+    bottom:-10px;
+    width:clamp(80px, 30vw, 150px);
+    height:auto;
+    opacity:0.3;
+    z-index:0;
+    filter:brightness(0.6);
+    pointer-events:none;
+  }
+
+  /* ---------- silueta de palmeras ---------- */
+  .palm{
+    position:fixed;
+    bottom:-10px;
+    font-size:90px;
+    opacity:0.5;
+    z-index:0;
+    filter:brightness(0.6);
+  }
+
+  /* ---------- tarjeta ---------- */
+  .card{
+    position:relative;
+    z-index:5;
+    max-width:420px;
+    width:100%;
+    background:var(--cream);
+    border-radius:24px;
+    padding:28px 22px 24px;
+    text-align:center;
+    box-shadow:0 30px 70px -20px rgba(0,0,0,0.5);
+    border:5px solid var(--mud);
+    border-image: repeating-linear-gradient(45deg, var(--mud), var(--mud) 10px, var(--sun) 10px, var(--sun) 20px) 5;
+    animation:pop-in 0.7s cubic-bezier(.34,1.56,.64,1) both;
+  }
+  @keyframes pop-in{
+    0%{ transform:scale(0.6) rotate(-3deg); opacity:0; }
+    100%{ transform:scale(1) rotate(0deg); opacity:1; }
+  }
+
+  .topper{
+    font-size:13px;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    font-weight:700;
+    color:var(--jungle);
+    margin-bottom:8px;
+  }
+
+  .headline{
+    font-family:'Baloo 2', sans-serif;
+    font-weight:800;
+    font-size:clamp(24px, 7.5vw, 42px);
+    line-height:1.05;
+    color:var(--coral);
+    text-shadow: 3px 3px 0 var(--sun);
+    margin-bottom:4px;
+  }
+
+  .subhead{
+    font-family:'Baloo 2', sans-serif;
+    font-weight:700;
+    font-size:clamp(15px, 4.2vw, 20px);
+    color:var(--jungle);
+    margin-bottom:8px;
+  }
+
+  /* ---------- dino protagonista de la tarjeta (imagen) ---------- */
+  .dino-img{
+    width:clamp(76px, 26vw, 100px);
+    height:auto;
+    display:block;
+    margin:2px auto 8px;
+    transform-origin:bottom center;
+    animation:stomp 1.4s ease-in-out infinite;
+    filter:drop-shadow(0 6px 6px rgba(0,0,0,0.25));
+  }
+  @keyframes stomp{
+    0%,100%{ transform:translateY(0) rotate(-3deg); }
+    50%{ transform:translateY(-10px) rotate(3deg); }
+  }
+
+  .name-line{
+    font-size:15px;
+    font-weight:600;
+    margin-bottom:14px;
+    color:#3a2b1a;
+  }
+  .name-line b{
+    font-family:'Baloo 2', sans-serif;
+    font-size:24px;
+    color:var(--jungle);
+    display:block;
+    margin-top:2px;
+  }
+
+  .details{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    background:#EFE6D0;
+    border-radius:16px;
+    padding:16px;
+    margin-bottom:16px;
+    border:2px dashed var(--jungle);
+  }
+
+  .detail-row{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    text-align:left;
+    font-weight:700;
+    font-size:14.5px;
+  }
+  .detail-row .icon{
+    font-size:22px;
+    flex-shrink:0;
+    animation:bounce-icon 1.8s ease-in-out infinite;
+  }
+  .detail-row:nth-child(2) .icon{ animation-delay:0.2s; }
+  .detail-row:nth-child(3) .icon{ animation-delay:0.4s; }
+  @keyframes bounce-icon{
+    0%,100%{ transform:translateY(0); }
+    50%{ transform:translateY(-4px); }
+  }
+  .detail-row span.label{
+    display:block;
+    font-size:11px;
+    font-weight:700;
+    color:var(--coral);
+    text-transform:uppercase;
+    letter-spacing:1px;
+  }
+  .detail-row div.value{ color:#3a2b1a; font-size:14.5px; }
+
+  .rsvp-msg{
+    font-size:14px;
+    font-weight:600;
+    margin-bottom:12px;
+    color:#3a2b1a;
+  }
+
+  .cta{
+    font-family:'Baloo 2', sans-serif;
+    font-size:17px;
+    font-weight:700;
+    color:#fff;
+    background:linear-gradient(135deg, var(--coral), var(--jungle));
+    border:none;
+    padding:14px 26px;
+    border-radius:50px;
+    cursor:pointer;
+    box-shadow:0 10px 0 #a83f2a, 0 14px 24px rgba(0,0,0,0.25);
+    transition:transform 0.12s ease;
+  }
+  .cta:active{
+    transform:translateY(8px);
+    box-shadow:0 2px 0 #a83f2a, 0 6px 12px rgba(0,0,0,0.25);
+  }
+  .cta:hover{ transform:translateY(-2px); }
+
+  .confirm-msg{
+    margin-top:14px;
+    font-family:'Baloo 2', sans-serif;
+    font-weight:700;
+    color:var(--jungle);
+    font-size:18px;
+    display:none;
+    animation:pop-in 0.4s ease both;
+  }
+
+  .footer-note{
+    margin-top:18px;
+    font-size:12px;
+    color:#8a7a5c;
+    font-weight:600;
+  }
+
+  /* ---------- pantallas más grandes (tablet / escritorio) ---------- */
+  @media (min-width:480px){
+    body{ padding:24px; }
+    .card{ padding:40px 32px 32px; border-radius:26px; }
+    .subhead{ margin-bottom:14px; }
+    .dino-img{ margin:4px auto 12px; }
+    .name-line{ margin-bottom:20px; }
+    .details{ gap:12px; padding:20px; margin-bottom:20px; }
+    .detail-row{ font-size:16px; }
+    .detail-row div.value{ font-size:16px; }
+    .rsvp-msg{ font-size:15px; margin-bottom:16px; }
+    .cta{ font-size:19px; padding:16px 30px; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation:none !important; transition:none !important; }
+  }
